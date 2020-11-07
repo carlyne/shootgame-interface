@@ -1,11 +1,13 @@
 [
 	{
+		"id": 1,
 		"name": "punk",
 		"img": "./src/img/player-punk.png",
 		"description" : "it's a punk"
 	},
 
-	{
+	{	
+		"id": 2,
 		"name": "child",
 		"img": "./src/img/player-child.png",
 		"description" : "it's a child"

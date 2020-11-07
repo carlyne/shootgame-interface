@@ -79,7 +79,7 @@ body {
 	height: 60%;
 	padding: 10px;
 	background-color: var(--main-bg-color);
-	background-size: contain;
+	background-size: auto;
 	background-position: center;
 	background-repeat: no-repeat;
 }

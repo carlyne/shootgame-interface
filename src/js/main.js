@@ -14,7 +14,7 @@ class CharacterSelection {
 		console.log('next character');
 	}
 
-	changerPrev() {
+	changePrev() {
 		console.log('prev character');
 	}
 }
@@ -47,7 +47,8 @@ class Game {
 		})
 
 		addBtn.addEventListener('click', () => {
-			return team.push(new Player(this.playerId));
+			team.push(new Player(this.playerId));
+			console.log(team);
 		})
 	}
 }
