@@ -40,17 +40,13 @@ class PlayerConfiguration extends CharacterSelection {
         const vue = document.querySelector('#' + this.playerId + ' .card-body');
 
 		nextBtn.addEventListener('click', () => {
-           const nextCharacter = this.nextCharacter(this.characterId);
-           this.characterId = nextCharacter.id;
-
-           vue.setAttribute('style', "background-image: url('" + nextCharacter.img + "')");
+		  const nextCharacter = this.nextCharacter(this.characterId);
+		  this.characterChange(nextCharacter);
 		})
 
 		prevBtn.addEventListener('click', () => {
             const prevCharacter = this.prevCharacter(this.characterId);
-            this.characterId = prevCharacter.id;
- 
-            vue.setAttribute('style', "background-image: url('" + prevCharacter.img + "')");
+		    this.characterChange(prevCharacter);
 		})
 
 		return this;
@@ -61,5 +57,16 @@ class PlayerConfiguration extends CharacterSelection {
 	 */
 	addEvents() {
 		return this.confirmPlayerEvent().editCharacterEvents();
+	}
+
+	/**
+	 * Met à jour le nouveau personnage dans l'hmtl et son id dans PlayerConfiguration
+	 * @param {Object} newCharacter 
+	 */
+	characterChange(newCharacter) {
+		const vue = document.querySelector('#' + this.playerId + ' .card-body');
+		vue.setAttribute('style', "background-image: url('" + newCharacter.img + "')");
+		
+		this.characterId = newCharacter.id;
 	}
 }
