@@ -1,4 +1,4 @@
-[
+const charactersList = [
 	{
 		"id": 1,
 		"name": "punk",

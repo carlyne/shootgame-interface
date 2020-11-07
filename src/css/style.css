@@ -82,6 +82,7 @@ body {
 	background-size: auto;
 	background-position: center;
 	background-repeat: no-repeat;
+	background-image: url('../img/player-punk.png');
 }
 
 .card-body button {
@@ -111,7 +112,6 @@ body {
 }
 
 .card.disabled .card-body {
-	background-image: url('../img/player-punk.png');
 	background-color: var(--main-bg-grey);
 	opacity: .4;
 }
