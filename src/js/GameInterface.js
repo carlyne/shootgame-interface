@@ -23,22 +23,30 @@ class GameInterface {
 
 	set confirmedCharacters(newConfirmedCharacters) {
 		this._confirmedCharacters.push(newConfirmedCharacters);
-
 		return this;
 	}
 
+	/**
+	 * Ajoute des événements à une liste de joueurs actifs
+	 * @returns {GameInterface}
+	 */
 	addPlayerConfiguration() {
 		this.activePlayersId.forEach(playerId => {
-			this.updateInterface(playerId);
-			
 			const playerConfiguration = new PlayerConfiguration(playerId, this);
 			playerConfiguration.addEvents();
+
+			this.updateVue(playerId);
 		});
 
 		return this;
 	}
 
-	updateInterface(playerId) {
+	/**
+	 * Met à jour l'affichage de l'élément html lié au joueur actif
+	 * @param {String} playerId 
+	 * @returns {GameInterface}
+	 */
+	updateVue(playerId) {
 		const card = document.getElementById(playerId);
 		card.classList.remove('disabled');
 

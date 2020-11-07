@@ -7,9 +7,15 @@ class CharacterSelection {
         return this._charactersList;
     }
 
-    nextCharacter(id) {
-        const character = this.charactersList.find(character => character.id === id + 1);
-
+    /**
+     * Trouve et retourne le personnage avec l'id suivant celui donné en paramètre
+     * @param {number} characterId
+     * @returns {Object}
+     */
+    nextCharacter(characterId) {
+        const character = this.charactersList.find(character => character.id === characterId + 1);
+        
+        // Si il n'existe pas d'id supérieur, retourne le premier personnage de la liste
         if (character === undefined) {
             return this.charactersList[0];
         }
@@ -17,9 +23,15 @@ class CharacterSelection {
         return character;
     }
 
-    prevCharacter(id) {
-        const character = this.charactersList.find(character => character.id === id - 1);
+    /**
+     * Trouve et retourne le personnage avec l'id précédant celui donné en paramètre
+     * @param {number} characterId 
+     * @returns {Object}
+     */
+    prevCharacter(characterId) {
+        const character = this.charactersList.find(character => character.id === characterId - 1);
 
+        // Si il n'existe pas d'id antérieur, retourne le dernier personnage de la liste
         if (character === undefined) {
             return this.charactersList[this.charactersList.length - 1];
         }
