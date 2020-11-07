@@ -1,0 +1,13 @@
+[
+	{
+		"name": "punk",
+		"img": "./src/img/player-punk.png",
+		"description" : "it's a punk"
+	},
+
+	{
+		"name": "child",
+		"img": "./src/img/player-child.png",
+		"description" : "it's a child"
+	}
+]
