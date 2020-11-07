@@ -1,24 +1,57 @@
-const nextBtns = document.querySelectorAll('.select-next');
-const prevBtns = document.querySelectorAll('.select-prev');
-const playersId = ['player-one', 'player-two', 'player-three', 'player-four'];
+const players = [...document.querySelectorAll('.card')];
+const activePlayers = players
+						.filter(player => !player.classList.contains('disabled'))
+						.map(activePlayer => activePlayer.getAttribute('id'));
 
 const team = [];
 
-class Player {
+class CharacterSelection {
 	constructor(playerId) {
 		this.playerId = playerId;
 	}
+
+	changeNext() {
+		console.log('next character');
+	}
+
+	changerPrev() {
+		console.log('prev character');
+	}
 }
 
-function trigger(playersId) {
-	playersId.forEach(playerId => {
-		const addBtn = document.querySelector('#' + playerId + ' .add');
+class Player extends CharacterSelection {
+	constructor(playerId) {
+		super(playerId);
+	}
+}
+
+class Game {
+	constructor(playerId) {
+		this.playerId = playerId;
+		this.trigger();
+	}
+
+	trigger() {
+		const character = new CharacterSelection(this.playerId);
+
+		const addBtn = document.querySelector('#' + this.playerId + ' .add');
+		const nextBtn = document.querySelector('#' + this.playerId + ' .select-next');
+		const prevBtn = document.querySelector('#' + this.playerId + ' .select-prev');
+
+		nextBtn.addEventListener('click', () => {
+			character.changeNext();
+		})
+
+		prevBtn.addEventListener('click', () => {
+			character.changePrev();
+		})
 
 		addBtn.addEventListener('click', () => {
-			console.log('click', playerId);
-			return team.push(new Player(playerId));
+			return team.push(new Player(this.playerId));
 		})
-	});
+	}
 }
 
-trigger(playersId);
+activePlayers.forEach(player => {
+	new Game(player);
+})
