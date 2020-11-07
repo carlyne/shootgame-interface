@@ -31,6 +31,8 @@ class GameInterface {
 	 * @returns {GameInterface}
 	 */
 	addPlayerConfiguration() {
+		new CharacterSelection();
+		
 		this.activePlayersId.forEach(playerId => {
 			const playerConfiguration = new PlayerConfiguration(playerId, this);
 			playerConfiguration.addEvents();

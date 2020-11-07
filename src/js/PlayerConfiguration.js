@@ -25,6 +25,7 @@ class PlayerConfiguration extends CharacterSelection {
 
 		addBtn.addEventListener('click', () => {
 			this.gameInterface.confirmedCharacters = this.characterId;
+			this.availableCharactersList = this.availableCharactersList.filter(character => character.id !== this.characterId);
 		})
 
 		return this;
@@ -37,9 +38,9 @@ class PlayerConfiguration extends CharacterSelection {
 	editCharacterEvents(){
 		const nextBtn = document.querySelector('#' + this.playerId + ' .select-next');
         const prevBtn = document.querySelector('#' + this.playerId + ' .select-prev');
-        const vue = document.querySelector('#' + this.playerId + ' .card-body');
 
 		nextBtn.addEventListener('click', () => {
+		  console.log(this._availableCharactersList);
 		  const nextCharacter = this.nextCharacter(this.characterId);
 		  this.characterChange(nextCharacter);
 		})
@@ -53,7 +54,7 @@ class PlayerConfiguration extends CharacterSelection {
 	};
 
 	/**
-	 * List des évenements attachés à un joeur
+	 * Liste des évenements attachés à un joueur
 	 */
 	addEvents() {
 		return this.confirmPlayerEvent().editCharacterEvents();
