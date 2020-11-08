@@ -23,5 +23,38 @@ class CharacterManager {
 			this.characters = newCharacter;
 		});
 	}
-    
+
+	nextCharacter(characterId) {
+		let newCharacter = {};
+
+		for (let i = 0; i < this.characters.length; i++) {
+			const character = this.characters[i];
+			if (character.id >= characterId) {
+				return newCharacter = character;
+			}
+		}
+
+		if (!newCharacter.length) {
+			return this.characters[0];
+		}
+
+		return newCharacter;
+	}
+
+	prevCharacter(characterId) {
+		let newCharacter = {};
+
+		for (let i = this.characters.length - 1; i >= 0; i--) {
+			const character = this.characters[i];
+			if (character.id <= characterId) {
+				return newCharacter = character;
+			}
+		}
+
+		if (!newCharacter.length) {
+			return this.characters[this.characters.length - 1];
+		}
+
+		return newCharacter;
+	} 
 }

@@ -1,9 +1,10 @@
 class Player extends Vue {
-    constructor(playerId) {
+    constructor(playerId, characterManager) {
         super(playerId);
 
         this._id = playerId;
-        this._character = {};
+        this._characterManager = characterManager;
+        this._character = characterManager.charactersList[0];
     }
 
     get id() {
@@ -14,18 +15,34 @@ class Player extends Vue {
         return this._character;
     }
 
+    get characterManager() {
+        return this._characterManager;
+    }
+
     set character(newCharacter) {
         this._character = newCharacter;
         return this;
     }
 
-    addConfirm() {
+    confirmEvent() {
         this.confirmBtn.addEventListener('click', () => {
-            console.log('confirm');
+            console.log("confirm current character", this.character);
         })
     }
 
-    addSelector() {
-        console.log('selection');
+    selectorEvent() {
+        this.nextBtn.addEventListener('click', () => {
+            const nextCharacterId = this.character.id + 1;
+            const newCharacter = this.characterManager.nextCharacter(nextCharacterId);
+            
+            this.character = newCharacter;
+        });
+
+        this.prevBtn.addEventListener('click', () => {
+            const prevCharacterId = this.character.id - 1;
+            const newCharacter = this.characterManager.prevCharacter(prevCharacterId);
+
+            this.character = newCharacter;       
+        })
     }
 }
