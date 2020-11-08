@@ -34,15 +34,19 @@ class Player extends Vue {
         this.nextBtn.addEventListener('click', () => {
             const nextCharacterId = this.character.id + 1;
             const newCharacter = this.characterManager.nextCharacter(nextCharacterId);
-            
-            this.character = newCharacter;
+            this.changeCharacter(newCharacter);
         });
 
         this.prevBtn.addEventListener('click', () => {
             const prevCharacterId = this.character.id - 1;
             const newCharacter = this.characterManager.prevCharacter(prevCharacterId);
-
-            this.character = newCharacter;       
+            this.changeCharacter(newCharacter);      
         })
+    }
+
+    changeCharacter(newCharacter) {
+        this.updateVueImg(newCharacter.img);
+        this.character = newCharacter;
+        return this;
     }
 }
