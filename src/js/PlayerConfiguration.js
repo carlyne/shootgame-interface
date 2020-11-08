@@ -6,7 +6,7 @@ class PlayerConfiguration extends Vue {
         this.characterSelection = characterSelection;
 		this._characterIndice = 0;
 
-		this.updateVue();
+		this.updateVueMenu();
     }
     
     get characterIndice() {
@@ -26,6 +26,8 @@ class PlayerConfiguration extends Vue {
 		this.confirmBtn.addEventListener('click', () => {
 			const characterId = this.characterSelection.availableCharactersList[this.characterIndice].id;
 			this.characterSelection.updateAvailableCharacters(characterId);
+
+			this.updateVueBtn();
 		})
 
 		return this;

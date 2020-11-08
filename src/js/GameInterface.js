@@ -26,21 +26,7 @@ class GameInterface {
 		this.activePlayersId.forEach(playerId => {
 			const playerConfiguration = new PlayerConfiguration(playerId, characterSelection);
 			playerConfiguration.addEvents();
-
-			this.updateVue(playerId);
 		});
-
-		return this;
-	}
-
-	/**
-	 * Met à jour l'affichage de l'élément html lié au joueur actif
-	 * @param {String} playerId 
-	 * @returns {GameInterface}
-	 */
-	updateVue(playerId) {
-		const card = document.getElementById(playerId);
-		card.classList.remove('disabled');
 
 		return this;
 	}
