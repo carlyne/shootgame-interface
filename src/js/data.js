@@ -18,5 +18,12 @@ const charactersList = [
 		"name": "blond",
 		"img": "./src/img/player-blond.png",
 		"description" : "it's a blond"
+	},
+
+	{	
+		"id": 4,
+		"name": "blue",
+		"img": "./src/img/player-blue.png",
+		"description" : "it's a blue"
 	}
 ]
