@@ -2,10 +2,15 @@ class CharacterSelection {
     constructor() {
         this._charactersList = charactersList;
         this._availableCharactersList = charactersList;
+        this._selectedCharacters = [];
     }
 
     get charactersList() {
         return this._charactersList;
+    }
+
+    get selectedCharacters() {
+        return this._selectedCharacters;
     }
 
     get availableCharactersList() {
@@ -17,35 +22,56 @@ class CharacterSelection {
         return this;
     }
 
+    set selectedCharacters(newSelectedCharacters) {
+        this._selectedCharacters.push(newSelectedCharacters);
+    }
+    
     /**
-     * Trouve et retourne le personnage avec l'id suivant celui donné en paramètre
-     * @param {number} characterId
+     * Retourne un personnage supérieur à l'indice donné
+     * @param {number} characterIndice 
      * @returns {Object}
      */
-    nextCharacter(characterId) {
-        const character = this.availableCharactersList.find(character => character.id === characterId + 1);
+    findNextCharacter(characterIndice) {
+        const character = this.availableCharactersList.find((character, indice) => indice >= characterIndice);
         
-        // Si il n'existe pas d'id supérieur, retourne le premier personnage de la liste
+        // Si l'id n'est pas valable, retourne le premier personnage de la liste
         if (character === undefined) {
             return this.availableCharactersList[0];
-        }
+        } 
 
         return character;
     }
 
     /**
-     * Trouve et retourne le personnage avec l'id précédant celui donné en paramètre
-     * @param {number} characterId 
+     * Retrouve un personnage anterieur à l'indice donné
+     * @param {number} characterIndice 
      * @returns {Object}
      */
-    prevCharacter(characterId) {
-        const character = this.availableCharactersList.find(character => character.id === characterId - 1);
+    findPrevCharacter(characterIndice) {
+        let character = {};
 
-        // Si il n'existe pas d'id antérieur, retourne le dernier personnage de la liste
-        if (character === undefined) {
-            return this.availableCharactersList[this.availableCharactersList.length - 1];
+        for (let i = this.availableCharactersList.length - 1; i >= 0; i--) {
+           if (i <= characterIndice) {
+               return character = this.availableCharactersList[i];
+           }
         }
+        
+        // Si l'id n'est pas valable, retourne le dernier personnage de la liste
+        if (!character.length) {
+            return this.availableCharactersList[this.availableCharactersList.length - 1];
+        } 
 
         return character;
+    }
+
+    /**
+     * Met à jour la liste des personnages disponibles
+     * @param {number} characterId 
+     */
+    updateAvailableCharacters(characterId) {
+        this.selectedCharacters = characterId;
+        
+        const newAvailableCharacters = this.availableCharactersList.filter(character => !this.selectedCharacters.includes(character.id));
+        this.availableCharactersList = newAvailableCharacters;
     }
 }

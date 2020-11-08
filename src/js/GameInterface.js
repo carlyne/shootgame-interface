@@ -1,9 +1,8 @@
-const activePlayersId =['player-one', 'player-two'];
+const activePlayersId = ['player-one', 'player-two'];
 
 class GameInterface {
 	constructor(activePlayersId) {
 		this._activePlayersId = activePlayersId;
-		this._confirmedCharacters = [];
 
 		this.addPlayerConfiguration();
 	}
@@ -12,17 +11,8 @@ class GameInterface {
 		return this._activePlayersId;
 	}
 
-	get confirmedCharacters() {
-		return this._confirmedCharacters;
-	}
-
 	set activePlayersId(newActivePlayersId) {
 		this._activePlayersId = newActivePlayersId;
-		return this;
-	}
-
-	set confirmedCharacters(newConfirmedCharacters) {
-		this._confirmedCharacters.push(newConfirmedCharacters);
 		return this;
 	}
 
@@ -31,10 +21,10 @@ class GameInterface {
 	 * @returns {GameInterface}
 	 */
 	addPlayerConfiguration() {
-		new CharacterSelection();
+		const characterSelection = new CharacterSelection();
 		
 		this.activePlayersId.forEach(playerId => {
-			const playerConfiguration = new PlayerConfiguration(playerId, this);
+			const playerConfiguration = new PlayerConfiguration(playerId, characterSelection);
 			playerConfiguration.addEvents();
 
 			this.updateVue(playerId);

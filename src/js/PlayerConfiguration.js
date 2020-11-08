@@ -1,18 +1,16 @@
-class PlayerConfiguration extends CharacterSelection {
-	constructor(playerId, gameInterface) {
-        super();
-
+class PlayerConfiguration {
+	constructor(playerId, characterSelection) {
 		this.playerId = playerId;
-        this.gameInterface = gameInterface;
-		this._characterId = 1;
+        this.characterSelection = characterSelection;
+		this._characterIndice = 0;
     }
     
-    get characterId() {
-        return this._characterId;
+    get characterIndice() {
+        return this._characterIndice;
     }
 
-    set characterId(newCharacterId) {
-        this._characterId = newCharacterId;
+    set characterIndice(newCharacterIndice) {
+        this._characterIndice = newCharacterIndice;
         return this;
     }
 
@@ -22,10 +20,10 @@ class PlayerConfiguration extends CharacterSelection {
 	 */
 	confirmPlayerEvent() {
 		const addBtn = document.querySelector('#' + this.playerId + ' .add');
-
+		
 		addBtn.addEventListener('click', () => {
-			this.gameInterface.confirmedCharacters = this.characterId;
-			this.availableCharactersList = this.availableCharactersList.filter(character => character.id !== this.characterId);
+			const characterId = this.characterSelection.availableCharactersList[this.characterIndice].id;
+			this.characterSelection.updateAvailableCharacters(characterId);
 		})
 
 		return this;
@@ -40,14 +38,13 @@ class PlayerConfiguration extends CharacterSelection {
         const prevBtn = document.querySelector('#' + this.playerId + ' .select-prev');
 
 		nextBtn.addEventListener('click', () => {
-		  console.log(this._availableCharactersList);
-		  const nextCharacter = this.nextCharacter(this.characterId);
-		  this.characterChange(nextCharacter);
+			const newCharacter = this.characterSelection.findNextCharacter(this.characterIndice + 1);
+		    this.characterChange(newCharacter);
 		})
 
 		prevBtn.addEventListener('click', () => {
-            const prevCharacter = this.prevCharacter(this.characterId);
-		    this.characterChange(prevCharacter);
+			const newCharacter = this.characterSelection.findPrevCharacter(this.characterIndice - 1);
+			this.characterChange(newCharacter);
 		})
 
 		return this;
@@ -61,13 +58,13 @@ class PlayerConfiguration extends CharacterSelection {
 	}
 
 	/**
-	 * Met à jour le nouveau personnage dans l'hmtl et son id dans PlayerConfiguration
+	 * Met à jour l'indice du personnage choisit et sa vue html
 	 * @param {Object} newCharacter 
 	 */
 	characterChange(newCharacter) {
 		const vue = document.querySelector('#' + this.playerId + ' .card-body');
 		vue.setAttribute('style', "background-image: url('" + newCharacter.img + "')");
-		
-		this.characterId = newCharacter.id;
+
+		this.characterIndice = this.characterSelection.availableCharactersList.indexOf(newCharacter);
 	}
 }
