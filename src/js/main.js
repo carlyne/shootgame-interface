@@ -15,5 +15,6 @@ const scriptLoader = (url) => {
 
 scriptLoader('./src/js/data.js')
 	.then(() => scriptLoader('./src/js/CharacterSelection.js'))
+	.then(() => scriptLoader('./src/js/Vue.js'))
 	.then(() => scriptLoader('./src/js/PlayerConfiguration.js'))
 	.then(() => scriptLoader('./src/js/GameInterface.js'));

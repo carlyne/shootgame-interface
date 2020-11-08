@@ -31,11 +31,17 @@ class CharacterSelection {
      * @param {number} characterIndice 
      * @returns {Object}
      */
-    findNextCharacter(characterIndice) {
-        const character = this.availableCharactersList.find((character, indice) => indice >= characterIndice);
+    findNextCharacter(characterIndice) {        
+        let character = {};
+
+        for (let i = 0; i < this.availableCharactersList.length; i++) {
+            if (i >= characterIndice) {
+                return character = this.availableCharactersList[i];
+            }
+         }
         
         // Si l'id n'est pas valable, retourne le premier personnage de la liste
-        if (character === undefined) {
+        if (!character.length) {
             return this.availableCharactersList[0];
         } 
 
@@ -69,9 +75,16 @@ class CharacterSelection {
      * @param {number} characterId 
      */
     updateAvailableCharacters(characterId) {
-        this.selectedCharacters = characterId;
-        
-        const newAvailableCharacters = this.availableCharactersList.filter(character => !this.selectedCharacters.includes(character.id));
-        this.availableCharactersList = newAvailableCharacters;
+        const indice = this.selectedCharacters.indexOf(characterId);
+
+        if (indice !== -1) {
+            this.selectedCharacters.splice(indice, 1);
+
+        } else {
+            this.selectedCharacters = characterId;
+        }
+
+        const newAvailableCharacters = this.charactersList.filter(character => !this.selectedCharacters.includes(character.id));
+        return this.availableCharactersList = newAvailableCharacters;
     }
 }

@@ -3,7 +3,8 @@ const activePlayersId = ['player-one', 'player-two'];
 class GameInterface {
 	constructor(activePlayersId) {
 		this._activePlayersId = activePlayersId;
-
+		this.characterSelection = new CharacterSelection();
+		this.players = [];
 		this.addPlayerConfiguration();
 	}
 
@@ -20,29 +21,33 @@ class GameInterface {
 	 * Ajoute des événements à une liste de joueurs actifs
 	 * @returns {GameInterface}
 	 */
-	addPlayerConfiguration() {
-		const characterSelection = new CharacterSelection();
-		
+	addPlayerConfiguration() {		
 		this.activePlayersId.forEach(playerId => {
-			const playerConfiguration = new PlayerConfiguration(playerId, characterSelection);
-			playerConfiguration.addEvents();
+			const playerConfiguration = new PlayerConfiguration(playerId, this.characterSelection, this);
+			this.players.push({ "id" : playerId, "config": playerConfiguration });
 
-			this.updateVue(playerId);
+			playerConfiguration.addEvents();
 		});
 
 		return this;
 	}
 
 	/**
-	 * Met à jour l'affichage de l'élément html lié au joueur actif
-	 * @param {String} playerId 
-	 * @returns {GameInterface}
+	 * Met à jour l'affichage des autres joueurs
+	 * @param {String} indice 
+	 * @param {number} playerId 
 	 */
-	updateVue(playerId) {
-		const card = document.getElementById(playerId);
-		card.classList.remove('disabled');
+	updatePlayersInterface(indice, playerId) {
+		const playersToChange = this.players.filter(player => player.id !== playerId);
 
-		return this;
+		playersToChange.forEach(player => {
+			const playerConfig = player.config;
+
+			if (playerConfig.characterIndice == indice ) {
+				const newCharacter = playerConfig.characterSelection.findNextCharacter(indice);
+				playerConfig.characterChange(newCharacter);
+			}
+		})
 	}
 }
 
