@@ -5,18 +5,31 @@ class Vue {
         this.confirmBtn = document.querySelector('#' + playerId + ' .confirm');
         this.nextBtn = document.querySelector('#' + playerId + ' .select-next');
         this.prevBtn = document.querySelector('#' + playerId + ' .select-prev');
+
         this.playerDisabled = false;
     }
 
+    /**
+     * Met à jour l'interface du menu en général
+     * @returns {Vue}
+     */
     updateVueMenu() {
         this.card.classList.remove('disabled');
         return this;
     }
 
+    /**
+     * Met à jour les boutons de l'interface d'un joueur
+     * @returns {Vue}
+     */
     updateVueBtn() {
-        return this._updateConfirm()._updateEdit();
+        this._updateConfirm()._updateEdit();
     }
 
+    /**
+     * Met à jour le bouton de confirmation de personnage
+     * @returns {boolean}
+     */
     _updateConfirm() {
         let textBtn = (this.playerDisabled) ? 'Confirmer' : 'Annuler';
         this.confirmBtn.innerText = textBtn;
@@ -26,6 +39,10 @@ class Vue {
         return this;
     }
 
+    /**
+     * Met à jour les boutons de sélections de personnages
+     * @returns {Vue}
+     */
     _updateEdit() {
         if (this.playerDisabled) {
             this.nextBtn.setAttribute('disabled', true);

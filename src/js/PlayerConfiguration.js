@@ -1,9 +1,10 @@
 class PlayerConfiguration extends Vue {
-	constructor(playerId, characterSelection) {
+	constructor(playerId, characterSelection, gameInterface) {
 		super(playerId);
 
 		this.playerId = playerId;
-        this.characterSelection = characterSelection;
+		this.characterSelection = characterSelection;
+		this.gameInterface = gameInterface;
 		this._characterIndice = 0;
 
 		this.updateVueMenu();
@@ -24,10 +25,19 @@ class PlayerConfiguration extends Vue {
 	 */
 	confirmPlayerEvent() {		
 		this.confirmBtn.addEventListener('click', () => {
-			const characterId = this.characterSelection.availableCharactersList[this.characterIndice].id;
+			let characterId = 0;
+
+			if (this.playerDisabled) {
+				characterId = this.characterSelection.charactersList[this.characterIndice].id;
+			} else {
+				characterId = this.characterSelection.availableCharactersList[this.characterIndice].id;
+			}
+
 			this.characterSelection.updateAvailableCharacters(characterId);
 
 			this.updateVueBtn();
+
+			this.gameInterface.updatePlayersInterface(this.characterIndice, this.playerId);
 		})
 
 		return this;
@@ -65,5 +75,6 @@ class PlayerConfiguration extends Vue {
 	characterChange(newCharacter) {
 		this.cardBg.setAttribute('style', "background-image: url('" + newCharacter.img + "')");
 		this.characterIndice = this.characterSelection.availableCharactersList.indexOf(newCharacter);
+		this.cardBg.setAttribute('data-character', this.characterIndice);
 	}
 }
