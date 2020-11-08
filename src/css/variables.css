@@ -1,7 +1,36 @@
-:root {
-	--main-bg-color: #EFF7EF;
-	--main-bg-grey: #EEEEEE;
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;700&display=swap');
 
-	--dark: #1C1E1C;
-	--grey: #BDC0BD;
+:root {
+	
+
+	/* === ========================== */
+	/* === Colors 
+	/* === ========================== */
+
+	--main-color: #2E554A;
+	--secondary-color: #3A836C;
+	--light-color: #76AF87;
+	--bg-color: #F5F1B9;
+	--action-color: #EA3458;
+
+	--dark: #0b1512;
+	--white: #f3f6f5;
+	--grey: #757a79;
+
+
+	/* === ========================== */
+	/* === Typefaces
+	/* === ========================== */
+
+	--main-head-family: 'Lilita One', cursive;
+	--main-family: 'Mukta', sans-serif;
+
+
+	/* === ========================== */
+	/* === Margin, padding & border
+	/* === ========================== */
+
+	--radius: 5px;
+	--radius-sm: 2px;
 }
