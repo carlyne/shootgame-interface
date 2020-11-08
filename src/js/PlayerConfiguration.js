@@ -1,8 +1,12 @@
-class PlayerConfiguration {
+class PlayerConfiguration extends Vue {
 	constructor(playerId, characterSelection) {
+		super(playerId);
+
 		this.playerId = playerId;
         this.characterSelection = characterSelection;
 		this._characterIndice = 0;
+
+		this.updateVue();
     }
     
     get characterIndice() {
@@ -18,10 +22,8 @@ class PlayerConfiguration {
 	 * Ajoute un événement de validation de personnage
 	 * @returns {PlayerConfiguration}
 	 */
-	confirmPlayerEvent() {
-		const addBtn = document.querySelector('#' + this.playerId + ' .add');
-		
-		addBtn.addEventListener('click', () => {
+	confirmPlayerEvent() {		
+		this.confirmBtn.addEventListener('click', () => {
 			const characterId = this.characterSelection.availableCharactersList[this.characterIndice].id;
 			this.characterSelection.updateAvailableCharacters(characterId);
 		})
@@ -34,15 +36,12 @@ class PlayerConfiguration {
 	 * @returns {PlayerConfiguration}
 	 */
 	editCharacterEvents(){
-		const nextBtn = document.querySelector('#' + this.playerId + ' .select-next');
-        const prevBtn = document.querySelector('#' + this.playerId + ' .select-prev');
-
-		nextBtn.addEventListener('click', () => {
+		this.nextBtn.addEventListener('click', () => {
 			const newCharacter = this.characterSelection.findNextCharacter(this.characterIndice + 1);
 		    this.characterChange(newCharacter);
 		})
 
-		prevBtn.addEventListener('click', () => {
+		this.prevBtn.addEventListener('click', () => {
 			const newCharacter = this.characterSelection.findPrevCharacter(this.characterIndice - 1);
 			this.characterChange(newCharacter);
 		})
@@ -62,9 +61,7 @@ class PlayerConfiguration {
 	 * @param {Object} newCharacter 
 	 */
 	characterChange(newCharacter) {
-		const vue = document.querySelector('#' + this.playerId + ' .card-body');
-		vue.setAttribute('style', "background-image: url('" + newCharacter.img + "')");
-
+		this.cardBg.setAttribute('style', "background-image: url('" + newCharacter.img + "')");
 		this.characterIndice = this.characterSelection.availableCharactersList.indexOf(newCharacter);
 	}
 }
