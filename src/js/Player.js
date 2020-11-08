@@ -26,6 +26,7 @@ class Player extends Vue {
 
     confirmEvent() {
         this.confirmBtn.addEventListener('click', () => {
+            this.characterManager.updateCharacters(this.character);
             console.log("confirm current character", this.character);
         })
     }

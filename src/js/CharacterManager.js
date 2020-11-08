@@ -56,5 +56,11 @@ class CharacterManager {
 		}
 
 		return newCharacter;
-	} 
+	}
+	
+	updateCharacters(playerCharacter) {
+		const character = this.characters.find(c => c.id === playerCharacter.id);
+		character.isAvailable = false;
+		console.log(character);
+	}
 }

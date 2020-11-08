@@ -26,6 +26,7 @@ class PlayerManager {
 		this.activePlayersId.forEach(playerId => {
 			const player = new Player(playerId, this.characterManager);
 			player.displayPlayer();
+			
 			this.players = player;
 		});
 		return this;

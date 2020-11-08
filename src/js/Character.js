@@ -4,6 +4,7 @@ class Character {
         this.name = character.name;
         this._img = character.img;
         this.description = character.description;
+        
         this._isAvailable = true;
     }
 
