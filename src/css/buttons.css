@@ -1,0 +1,55 @@
+.card-body i {
+	position: absolute;
+	padding: 10px;
+	top: 50%;
+	font-size: 1.75rem;
+	color: var(--main-color);
+	border: 3px solid var(--action-color);
+	border-radius: var(--radius);
+}
+
+.card-body .select-next {
+	right: 10px;
+}
+
+.card-body .select-prev {
+	left: 10px;
+}
+
+.confirm {
+	width: 150px;
+	padding: 20px;
+	color: var(--white);
+	border-radius: var(--radius);
+	border: 3px solid var(--bg-color);
+	text-transform: uppercase;
+	font-size: 1.15rem;
+	font-family: var(--main-head-family);
+	background-color: var(--light-color);
+	cursor: pointer;
+}
+
+
+/* === ====================== */
+/* === Responsive
+/* === ====================== */
+
+@media screen and (min-width: 800px) {
+
+}
+
+@media screen and (min-width: 1024px) {
+
+}
+
+@media screen and (min-width: 1220px) {
+
+}
+
+@media screen and (min-width: 1366px) {
+
+}
+
+@media screen and (min-width: 1440px) {
+
+}
